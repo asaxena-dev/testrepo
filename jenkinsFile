@@ -4,6 +4,10 @@ def wstatus (String varstat) {
     println (varstat)
 }
 
+def gitcheckout {
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'outscripts'], [$class: 'CleanBeforeCheckout']], gitTool: 'git', submoduleCfg: [], userRemoteConfigs: [[credentialsId: '945e8f1b-3a65-45b1-96a5-7ff4df589b3b', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/asaxena-dev/testrepo']]])
+}
+
 pipeline {
     parameters {
         string(name:'testRun', defaultValue:'yes',description: 'Want to run Test?',trim:true)
@@ -16,7 +20,9 @@ pipeline {
             }
             steps {
                 bat "echo Building: "+type
+                gitcheckout
                 wstatus "Sucessful"
+                
             }
         }
         stage("Test") {
@@ -26,13 +32,13 @@ pipeline {
                 }
             }
             agent {
-                label "TestLinux"
+                label "master"
             }
             steps {
                 script {
                     type = "Test"
                 }
-                sh "echo Building: "+type
+                bat "echo Building: "+type
             }
         }
     }
