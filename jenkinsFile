@@ -1,0 +1,44 @@
+def type = "Build"
+
+def wstatus (String varstat) {
+    println (varstat)
+}
+
+pipeline {
+    parameters {
+        string(name:'testRun', defaultValue:'yes',description: 'Want to run Test?',trim:true)
+    }
+    agent "none"
+    stages {
+        stage("Build") {
+            agent {
+                label "master"
+            }
+            steps {
+                bat "echo Building: "+type
+                wstatus "Sucessful"
+            }
+        }
+        stage("Test") {
+            when {
+                expression {
+                    testRun == 'yes'
+                }
+            }
+            agent {
+                label "TestLinux"
+            }
+            steps {
+                script {
+                    type = "Test"
+                }
+                sh "echo Building: "+type
+            }
+        }
+    }
+    post {
+        success {
+            wstatus "Sucessfull"
+        }
+    }
+}
