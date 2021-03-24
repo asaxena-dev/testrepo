@@ -46,7 +46,7 @@ pipeline {
     }
     post {
         success {
-            wstatus "Sucessfull"
+            wstatus "Sucessful"
         }
     }
 }
