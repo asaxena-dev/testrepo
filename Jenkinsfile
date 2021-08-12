@@ -18,15 +18,15 @@ pipeline {
             agent {
                 label "master"
             }
-            steps {
+            steps {               
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'outscripts'], [$class: 'CleanBeforeCheckout']], gitTool: 'git', submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'MyGitHubCred', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/asaxena-dev/mslearn-tailspin-spacegame-web']]])
-                
+                input("Do you want to continue")
                 sh "echo Building: "+type
                
                 wstatus "Sucessful"
                 
             }
-        }
+        }       
         stage("Test") {
             when {
                 expression {
