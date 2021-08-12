@@ -37,6 +37,11 @@ pipeline {
                 label "master"
             }
             stages {
+                stage('Test') {
+                    step {
+                        sh "echo Test"
+                    }
+                }
                 parallel {
                     stage('Test-A') {
                         steps {
