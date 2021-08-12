@@ -39,8 +39,7 @@ pipeline {
             steps {
                 script {
                     type = "Test"
-                }
-                def type = "Build"
+                }                
                 sh "echo Building: "+type
             }
         }
