@@ -38,10 +38,7 @@ pipeline {
             }
             stages {
                 stage('Test') {
-                    step {
-                        sh "echo Test"
-                    }
-                }
+ 
                 parallel {
                     stage('Test-A') {
                         steps {
@@ -56,6 +53,7 @@ pipeline {
                             sh "echo Test-B"   
                         }
                     }
+                }
                 }
             }
         }
