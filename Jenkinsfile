@@ -36,11 +36,22 @@ pipeline {
             agent {
                 label "master"
             }
-            steps {
-                script {
-                    type = "Test"
-                }                
-                sh "echo Building: "+type
+            stages {
+                parallel {
+                    stage('Test-A') {
+                        steps {
+                            script {
+                                type = "Test"
+                            }                
+                            sh "echo Testing A: "+type
+                        }
+                    }
+                    stage('Test-B') {
+                        steps {
+                            sh "echo Test-B"   
+                        }
+                    }
+                }
             }
         }
     }
