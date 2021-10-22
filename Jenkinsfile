@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage("Build") {
             agent {
-                label "master"
+                label "TestLinux"
             }
             steps {               
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'outscripts'], [$class: 'CleanBeforeCheckout']], gitTool: 'git', submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'MyGitHubCred', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/asaxena-dev/mslearn-tailspin-spacegame-web']]])
@@ -45,12 +45,12 @@ pipeline {
                             script {
                                 type = "Test"
                             }                
-                            sh "echo Testing A: "+type
+                            bat "echo Testing A: "
                         }
                     }
                     stage('Test-B') {
                         steps {
-                            sh "echo Test-B"   
+                            bat "echo Test-B"   
                         }
                     }
                 }
