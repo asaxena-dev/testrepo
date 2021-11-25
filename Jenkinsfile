@@ -34,7 +34,7 @@ pipeline {
                 }
             }
             agent {
-                label "master"
+                label "testLinux"
             }
             stages {
                 stage('Test') {
