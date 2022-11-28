@@ -33,4 +33,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
-          echo secrets.MY_TEST_KEY
+          echo ${{ secrets.MY_TEST_KEY }}
