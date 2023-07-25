@@ -20,6 +20,7 @@ pipeline {
                 label 'testWindows'
             }
             steps {
+                deleteDir()
                 checkout scm
                 bat "git checkout " + gitBranch
                 bat "git branch"
