@@ -23,6 +23,7 @@ pipeline {
                 checkout scm
                 bat "git checkout " + gitBranch
                 bat "git branch"
+                bat "type README.md"
               //  checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'outscripts'], [$class: 'CleanBeforeCheckout']], gitTool: 'git', submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'MyGitHubCred', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/asaxena-dev/mslearn-tailspin-spacegame-web']]])
              //   input("Do you want to continue")
                 bat "echo Building: "+type
