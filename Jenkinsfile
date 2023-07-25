@@ -20,9 +20,9 @@ pipeline {
                 label 'testWindows'
             }
             steps {
-                deleteDir()
+       //         deleteDir()
                 checkout scm
-                bat "git checkout " + gitBranch
+                bat "git checkout origin/" + gitBranch
                 bat "git branch"
                 bat "type README.md"
               //  checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'outscripts'], [$class: 'CleanBeforeCheckout']], gitTool: 'git', submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'MyGitHubCred', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/asaxena-dev/mslearn-tailspin-spacegame-web']]])
