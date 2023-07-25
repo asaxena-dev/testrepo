@@ -11,6 +11,7 @@ def gitcheckout() {
 pipeline {
     parameters {
         string(name:'testRun', defaultValue:'yes',description: 'Want to run Test?',trim:true)
+        string(name:'gitBranch', defaultValue:'test_for_scm',description: 'which branch to build',trim:true)
     }
     agent "none"
     stages {
@@ -20,7 +21,8 @@ pipeline {
             }
             steps {
                 checkout scm
-                
+                bat "git checkout " + gitBranch
+                bat "git branch"
               //  checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'outscripts'], [$class: 'CleanBeforeCheckout']], gitTool: 'git', submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'MyGitHubCred', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/asaxena-dev/mslearn-tailspin-spacegame-web']]])
              //   input("Do you want to continue")
                 bat "echo Building: "+type
