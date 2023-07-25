@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage("Build") {
             agent {
-                label: 'testWindows'
+                label 'testWindows'
             }
             steps {
                 checkout scm
